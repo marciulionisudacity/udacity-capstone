@@ -1,0 +1,29 @@
+version: 2.1
+
+jobs:
+  lint-code:
+    docker:
+      - image: python:3.7
+    steps:
+      - checkout
+      - run:
+          name: Install python dependencies
+          command: |
+            apt-get update
+            apt-get install -y curl
+            apt-get install -y build-essential
+            apt-get install -y liblapack-dev
+            apt-get install -y gfortran
+            apt-get install -y libblas-dev
+            apt-get install -y libopenblas-dev
+
+            make setup
+            make install
+      - run:
+          name: Run Lint Checks
+          command: make lint             
+
+workflows:
+  default:
+    jobs: 
+      - lint-code
