@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . app.py /app/
 COPY . requirements.txt /app/
-COPY . /model_data/ /app/
+COPY . /templates/ /app/
 
 # hadolint ignore=DL3013
 RUN pip install --upgrade --no-cache-dir pip &&\
