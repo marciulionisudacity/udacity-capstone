@@ -4,7 +4,6 @@
 # Dockerfile should pass hadolint
 # app.py should pass pylint
 # (Optional) Build a simple integration test
-
 setup:	
 	# Create python virtualenv & source it
 	python3 -m venv ~/.devops 
@@ -12,8 +11,9 @@ setup:
 
 install_hadolint:
 	#install hadolint
-	wget -O /usr/local/bin/hadolint "https://github.com/hadolint/hadolint/releases/download/latest/hadolint-$(uname -s)-$(uname -m)"
+	curl -sL -o /usr/local/bin/hadolint "https://github.com/hadolint/hadolint/releases/download/v1.18.0/hadolint-${shell uname -s}-${shell uname -m}"
 	chmod +x /usr/local/bin/hadolint
+
 
 install:
 	# This should be run from inside a virtualenv
