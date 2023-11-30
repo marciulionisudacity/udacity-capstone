@@ -5,14 +5,14 @@
 # app.py should pass pylint
 # (Optional) Build a simple integration test
 
-setup:
-	#install hadolint
-	curl -sL -o /usr/local/bin/hadolint "https://github.com/hadolint/hadolint/releases/download/v1.18.0/hadolint-$(uname -s)-$(uname -m)" &&\
-    	chmod +x /usr/local/bin/hadolint 
-	
+setup:	
 	# Create python virtualenv & source it
 	python3 -m venv ~/.devops  &&\
 		. ~/.devops/bin/activate
+
+	#install hadolint
+	curl -sL -o /usr/local/bin/hadolint "https://github.com/hadolint/hadolint/releases/download/v1.18.0/hadolint-$(uname -s)-$(uname -m)" &&\
+    	chmod +x /usr/local/bin/hadolint 	
 
 install:
 	# This should be run from inside a virtualenv
