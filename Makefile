@@ -7,13 +7,13 @@
 
 setup:	
 	# Create python virtualenv & source it
-	python3 -m venv ~/.devops  &&\
-		. ~/.devops/bin/activate
+	python3 -m venv ~/.devops 
+	. ~/.devops/bin/activate
 
 install_hadolint:
 	#install hadolint
-	curl -sL -o /usr/local/bin/hadolint "https://github.com/hadolint/hadolint/releases/download/v1.18.0/hadolint-$(uname -s)-$(uname -m)" &&\
-    	chmod +x /usr/local/bin/hadolint 	
+	curl -sL -o /usr/local/bin/hadolint "https://github.com/hadolint/hadolint/releases/download/v1.18.0/hadolint-$(uname -s)-$(uname -m)"
+    chmod +x /usr/local/bin/hadolint
 
 install:
 	# This should be run from inside a virtualenv
