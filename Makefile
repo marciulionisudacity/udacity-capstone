@@ -12,9 +12,8 @@ setup:
 
 install_hadolint:
 	#install hadolint
-	curl -sL -o /usr/local/bin/hadolint "https://github.com/hadolint/hadolint/releases/download/latest/hadolint-$(uname -s)-$(uname -m)"
+	wget -O /usr/local/bin/hadolint "https://github.com/hadolint/hadolint/releases/download/latest/hadolint-$(uname -s)-$(uname -m)"
 	chmod +x /usr/local/bin/hadolint
-
 
 install:
 	# This should be run from inside a virtualenv
