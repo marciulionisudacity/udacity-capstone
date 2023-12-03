@@ -44,3 +44,5 @@ workflows:
   default:
     jobs: 
       - lint-code
+      - build-image:
+          requires: [lint-code]
