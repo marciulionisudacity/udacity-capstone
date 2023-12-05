@@ -33,10 +33,18 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
+      - run:
+        name: Install envsubst
+        command: |
+          apt-get install -y gettext-base
+      - run: 
+        name: update deployment file
+        command: |
+          envsubst < deployment.yml > updated-deployment.yml    
       - kubernetes/install-kubectl
       - kubernetes/create-or-update-resource:
           get-rollout-status: true
-          resource-file-path: deployment.yaml
+          resource-file-path: updated-deployment.yaml
           resource-name: todo-app-deployment
           show-kubectl-command: true         
 
