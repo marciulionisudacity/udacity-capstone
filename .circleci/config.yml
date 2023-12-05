@@ -46,11 +46,16 @@ jobs:
       - aws-eks/update-kubeconfig-with-authenticator:
           authenticator-release-tag: "v0.5.6"
           cluster-name: capstone
-      - kubernetes/create-or-update-resource:
-          get-rollout-status: true
-          resource-file-path: updated-deployment.yml   
-          resource-name: capstone
-          show-kubectl-command: true         
+      - run: 
+          name: deploy 
+          command: |
+            kubectl apply -f updated-deployment.yml
+            
+      # - kubernetes/create-or-update-resource:
+      #     get-rollout-status: true
+      #     resource-file-path: updated-deployment.yml   
+      #     resource-name: capstone
+      #     show-kubectl-command: true         
 
 workflows:
   default:
