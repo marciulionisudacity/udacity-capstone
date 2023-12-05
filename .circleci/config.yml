@@ -34,9 +34,6 @@ jobs:
     steps:
       - checkout
       - kubernetes/install-kubectl
-      - kubernetes/update-container-image:
-          resource-name: deployment/todo-deployment
-          container-image-updates: "910436101907.dkr.ecr.us-east-1.amazonaws.com/capstone:$CIRCLE_SHA1"
       - kubernetes/create-or-update-resource:
           get-rollout-status: true
           resource-file-path: deployment.yaml

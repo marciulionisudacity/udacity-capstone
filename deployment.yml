@@ -14,5 +14,5 @@ spec:
     spec:
       containers:
         - name: todo-my-app-container
-          ports:
+          image: 910436101907.dkr.ecr.us-east-1.amazonaws.com/capstone:$CIRCLE_SHA1
             - containerPort: 80
