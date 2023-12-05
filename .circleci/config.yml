@@ -48,7 +48,7 @@ jobs:
           cluster-name: capstone
       - kubernetes/create-or-update-resource:
           get-rollout-status: true
-          resource-file-path: ./deployment.yaml
+          resource-file-path: updated-deployment.yml   
           resource-name: todo-app-deployment
           show-kubectl-command: true         
 
