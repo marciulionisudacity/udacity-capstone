@@ -37,5 +37,5 @@ workflows:
           dockerfile: Dockerfile
           path: .
           repo: capstone
-          tag: "$CIRCLE_SHA1"
+          tag: "$CIRCLE_WORKFLOW_ID:0:7"
           requires: [lint-code]
