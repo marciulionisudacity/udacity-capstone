@@ -44,6 +44,7 @@ jobs:
             envsubst < deployment.yml > updated-deployment.yml    
       - kubernetes/install-kubectl
       - aws-eks/update-kubeconfig-with-authenticator:
+          authenticator-release-tag: "v0.5.6"
           cluster-name: capstone
       - kubernetes/create-or-update-resource:
           get-rollout-status: true
