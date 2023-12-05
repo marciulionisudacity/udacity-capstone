@@ -42,12 +42,16 @@ jobs:
           command: |
             envsubst < deployment.yml > updated-deployment.yml    
       - kubernetes/install-kubectl
-      - kubernetes/install-kubeconfig
-      - kubernetes/create-or-update-resource:
-          get-rollout-status: true
-          resource-file-path: updated-deployment.yaml
-          resource-name: todo-app-deployment
-          show-kubectl-command: true         
+      - run: 
+          name: run kube
+          command: | 
+            kubectl apply -f updated-deployment.yml    
+      # - kubernetes/install-kubeconfig
+      # - kubernetes/create-or-update-resource:
+      #     get-rollout-status: true
+      #     resource-file-path: updated-deployment.yaml
+      #     resource-name: todo-app-deployment
+      #     show-kubectl-command: true         
 
 workflows:
   default:
