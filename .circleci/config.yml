@@ -1,6 +1,7 @@
 version: 2.1
 
 orbs:
+  aws-eks: circleci/aws-eks@1.0.0
   aws-ecr: circleci/aws-ecr@8.1.3
   kubernetes: circleci/kubernetes@1.3.1
 
@@ -42,16 +43,13 @@ jobs:
           command: |
             envsubst < deployment.yml > updated-deployment.yml    
       - kubernetes/install-kubectl
-      - run: 
-          name: run kube
-          command: | 
-            kubectl apply -f updated-deployment.yml    
-      # - kubernetes/install-kubeconfig
-      # - kubernetes/create-or-update-resource:
-      #     get-rollout-status: true
-      #     resource-file-path: updated-deployment.yaml
-      #     resource-name: todo-app-deployment
-      #     show-kubectl-command: true         
+      - aws-eks/update-kubeconfig-with-authenticator:
+          cluster-name: capstone
+      - kubernetes/create-or-update-resource:
+          get-rollout-status: true
+          resource-file-path: updated-deployment.yaml
+          resource-name: todo-app-deployment
+          show-kubectl-command: true         
 
 workflows:
   default:
