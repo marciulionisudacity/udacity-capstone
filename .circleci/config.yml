@@ -26,10 +26,7 @@ jobs:
 
   build-image:
     docker:
-      - image: cimg/base:2022.09
-        auth:
-          username: $DOCKERHUB_USERNAME
-          password: $DOCKERHUB_PASSWORD
+      - image: amazon/aws-cli
     steps:
       - checkout
       - setup_remote_docker
