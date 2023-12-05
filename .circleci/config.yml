@@ -36,7 +36,7 @@ jobs:
       - run:
           name: Install envsubst
           command: |
-            apt install -y gettext-base
+            sudo apt-get install -y gettext-base
       - run: 
           name: update deployment file
           command: |
