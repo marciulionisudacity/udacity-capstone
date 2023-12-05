@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   aws-ecr: circleci/aws-ecr@8.1.3
+  kubernetes: circleci/kubernetes@1.3.1
 
 jobs:
   lint-code:
@@ -26,7 +27,19 @@ jobs:
       - run:
           name: Run Lint Checks
           command: make lint             
-            
+
+  create-update:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - kubernetes/install-kubectl
+      - kubernetes/create-or-update-resource:
+          get-rollout-status: true
+          resource-file-path: deployment.yaml
+          resource-name: todo-app-deployment
+          show-kubectl-command: true         
+
 workflows:
   default:
     jobs: 
@@ -39,3 +52,5 @@ workflows:
           repo: capstone
           tag: "$CIRCLE_SHA1"
           requires: [lint-code]
+      - create-update:
+          requires: aws-ecr/build-and-push-image
