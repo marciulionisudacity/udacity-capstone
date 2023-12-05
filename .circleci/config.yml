@@ -51,14 +51,14 @@ jobs:
 workflows:
   default:
     jobs: 
-      # - lint-code
-      # - aws-ecr/build-and-push-image:
-      #     context: aws-dev
-      #     create-repo: false
-      #     dockerfile: Dockerfile
-      #     path: .
-      #     repo: capstone
-      #     tag: "$CIRCLE_SHA1"
-      #     requires: [lint-code]
-      - create-update #:
-          # requires: [aws-ecr/build-and-push-image]
+      - lint-code
+      - aws-ecr/build-and-push-image:
+          context: aws-dev
+          create-repo: false
+          dockerfile: Dockerfile
+          path: .
+          repo: capstone
+          tag: "$CIRCLE_SHA1"
+          requires: [lint-code]
+      - create-update:
+          requires: [aws-ecr/build-and-push-image]
