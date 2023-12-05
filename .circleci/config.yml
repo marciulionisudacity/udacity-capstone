@@ -44,7 +44,7 @@ jobs:
       - kubernetes/install-kubectl
       - kubernetes/create-or-update-resource:
           get-rollout-status: true
-          resource-file-path: updated-deployment.yaml
+          resource-file-path: deployment.yaml
           resource-name: todo-app-deployment
           show-kubectl-command: true         
 
