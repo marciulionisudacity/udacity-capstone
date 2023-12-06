@@ -7,6 +7,10 @@ spec:
   selector:
     matchLabels:
       app: todo-app
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1    
   template:
     metadata:
       labels:
@@ -14,6 +18,19 @@ spec:
     spec:
       containers:
         - name: todo-my-app-container
-          image: 910436101907.dkr.ecr.us-east-1.amazonaws.com/capstone:$CIRCLE_SHA1
+          image: 910436101907.dkr.ecr.us-east-1.amazonaws.com/capstone:611d5026fa8ff196002770380a25075409c4f349
           ports:
             - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-app-service
+spec:
+  selector:
+    app: todo-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer

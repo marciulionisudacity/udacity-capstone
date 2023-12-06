@@ -49,13 +49,14 @@ jobs:
       - run: 
           name: deploy 
           command: |
-            kubectl apply -f updated-deployment.yml
-            
-      # - kubernetes/create-or-update-resource:
-      #     get-rollout-status: true
-      #     resource-file-path: updated-deployment.yml   
-      #     resource-name: capstone
-      #     show-kubectl-command: true         
+            kubectl apply -f updated-deployment.yml --record
+            kubectl rollout status deployment/todo-app-deployment 
+            if [ $? -eq 0 ]; then
+                echo "Deployment was successful"
+            else
+                echo "Deployment failed. Executing roll back action:"
+                kubectl rollout undo deployment todo-app-deployment
+            fi
 
 workflows:
   default:
